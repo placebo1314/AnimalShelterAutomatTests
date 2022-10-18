@@ -37,7 +37,7 @@ public class LoginTest {
     }
 
     @Test
-    public void loginUserSuccessful(){
+    public void loginUser(){
         lp.logIn(userEmail, userPassword);
 
         assertTrue(lp.validateLoginUserName(userName));

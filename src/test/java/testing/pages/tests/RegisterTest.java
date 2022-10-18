@@ -1,7 +1,6 @@
 package testing.pages.tests;
 
 import org.junit.jupiter.api.*;
-import testing.pages.pages.AdminPage;
 import testing.pages.pages.LoginPage;
 import testing.pages.pages.RegisterPage;
 
@@ -15,7 +14,7 @@ public class RegisterTest {
     LoginPage lp;
     RegisterPage rp;
 
-    private String userName = "Test" + getAlphaNumericString(5);
+    private final String userName = "Test" + getAlphaNumericString(5);
     private String userEmail = userName + "@" + userName;
     private String userPassword = System.getenv("userPassword");//"aa";
     private String adminName = System.getenv("adminName");//"Admin";
@@ -37,7 +36,7 @@ public class RegisterTest {
     }
 
     @Test
-    public void registerSuccessful(){
+    public void registerUser(){
         rp.RegistNewAccount(userName, userEmail, userPassword);
         lp.logIn(userEmail, userPassword);
 
