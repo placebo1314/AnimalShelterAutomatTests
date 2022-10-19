@@ -21,7 +21,7 @@ public class AdminTest {
         lp = new LoginPage();
         ap = new AdminPage();
 
-        lp.getUrl("https://localhost:7241/Account/Login");
+        lp.getUrl(lp.LOGINuRL);
         lp.logIn(lp.ADMINeMAIL, ADMINpASSWORD);
     }
     @AfterAll

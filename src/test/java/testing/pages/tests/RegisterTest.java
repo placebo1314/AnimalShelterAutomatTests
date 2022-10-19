@@ -32,7 +32,7 @@ public class RegisterTest {
 
     @Test
     public void registerUser(){
-        rp.RegistNewAccount(lp.USERnAME, lp.USEReMAIL, USERpASSWORD);
+        rp.RegistNewAccount(rp.USERnAME, rp.USEReMAIL, USERpASSWORD);
         lp.logIn(lp.USEReMAIL, USERpASSWORD);
 
         assertTrue(lp.validateLoginUserName(lp.USERnAME));

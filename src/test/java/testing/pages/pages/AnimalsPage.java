@@ -23,8 +23,7 @@ public class AnimalsPage extends BasePage {
         select.selectByValue(species);
     }
     public boolean hasOnlySpecies(String species) {
-        String path = "//tbody/tr/td[" + findThByName("Fajta") + "]";
-        for (WebElement e : driver.findElements(By.xpath(path)))
+        for (WebElement e : driver.findElements(By.xpath("//tbody/tr/td[" + findThByName("Fajta") + "]")))
         {
             if (!e.getText().contains(species))
                 return false;

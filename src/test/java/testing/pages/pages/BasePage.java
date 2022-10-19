@@ -18,10 +18,11 @@ public abstract class BasePage {
     @FindBy(id = "logout")
     protected WebElement logoutButton;
 
-    public String USERnAME = System.getenv("userName");//"aa";
-    public String USEReMAIL = System.getenv("userEmail");// "aa@aa";
-    public String ADMINnAME = System.getenv("adminName");//"Admin";
-    public String ADMINeMAIL = System.getenv("adminEmail");//"Admin@Admin";
+    public final String USERnAME = System.getenv("userName");//"aa";
+    public final String USEReMAIL = System.getenv("userEmail");// "aa@aa";
+    public final String ADMINnAME = System.getenv("adminName");//"Admin";
+    public final String ADMINeMAIL = System.getenv("adminEmail");//"Admin@Admin";
+    public final String LOGINuRL = "https://localhost:7241/Account/Login";
 
     public BasePage(){
         this.driver = DriverSingleton.getDriver();

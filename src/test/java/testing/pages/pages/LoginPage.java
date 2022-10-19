@@ -23,7 +23,7 @@ public class LoginPage extends BasePage {
         passwordField.sendKeys(password);
     }
     public void logIn(String email, String password){
-        getUrl("https://localhost:7241/Account/Login");
+        getUrl(LOGINuRL);
         fillEmailAndPassword(email, password);
         submitLogin.click();
     }

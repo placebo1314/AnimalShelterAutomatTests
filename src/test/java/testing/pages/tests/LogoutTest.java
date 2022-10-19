@@ -18,7 +18,7 @@ public class LogoutTest {
     @BeforeAll
     public void setUp() {
         lp = new LoginPage();
-        lp.getUrl("https://localhost:7241/Account/Login");
+        lp.getUrl(lp.LOGINuRL);
     }
     @AfterAll
     public void tearDown(){

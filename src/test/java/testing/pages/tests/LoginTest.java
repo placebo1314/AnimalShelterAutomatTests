@@ -24,7 +24,7 @@ public class LoginTest {
     }
     @BeforeEach
     public void openLoginPage() {
-        lp.getUrl("https://localhost:7241/Account/Login");
+        lp.getUrl(lp.LOGINuRL);
     }
 
     @AfterAll

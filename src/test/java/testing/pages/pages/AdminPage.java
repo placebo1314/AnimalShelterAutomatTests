@@ -68,12 +68,10 @@ public class AdminPage extends BasePage{
     public void deleteAnimal(String name) {
         String path = "//tbody/tr[" + findTrByName(name) + "]/td/a/i[@class='fa fa-trash']";
         driver.findElement(By.xpath(path)).click();
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
+        acceptAlert();
     }
     public void editAnimal(String name, String editFieldId, String newValue) {
-        String path = "//tbody/tr[" + findTrByName(name) + "]/td/a/i[@class='fi-page-edit']";
-        driver.findElement(By.xpath(path)).click();
+        driver.findElement(By.xpath("//tbody/tr[" + findTrByName(name) + "]/td/a/i[@class='fi-page-edit']")).click();
         WebElement target = driver.findElement(By.id(editFieldId));
         target.clear();
         target.sendKeys(newValue);
@@ -81,8 +79,11 @@ public class AdminPage extends BasePage{
     }
     public void changeAdminStatus(String userName) {
         editUsersButton.click();
-        String path =  "//tbody/tr[" + findTrByName(userName) + "]/td[" + findThByName("Edit") + "]/a";
-        driver.findElement(By.xpath(path)).click();
+        driver.findElement(By.xpath("//tbody/tr[" + findTrByName(userName) + "]/td[" + findThByName("Edit") + "]/a")).click();
+
+        acceptAlert();
+    }
+    private void acceptAlert() {
         Alert alert = driver.switchTo().alert();
         alert.accept();
     }
