@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import testing.pages.pages.LoginPage;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static testing.pages.utils.DriverSingleton.quit;
 
@@ -14,8 +13,7 @@ import static testing.pages.utils.DriverSingleton.quit;
 public class LogoutTest {
     LoginPage lp;
 
-    String userEmail = System.getenv("userEmail");
-    String userPassword = System.getenv("userPassword");
+    private final String USERpASSWORD = System.getenv("userPassword");
 
     @BeforeAll
     public void setUp() {
@@ -29,7 +27,7 @@ public class LogoutTest {
 
     @Test
     public void logoutSuccessful(){
-        lp.logIn(userEmail, userPassword);
+        lp.logIn(lp.USEReMAIL, USERpASSWORD);
         lp.logout();
 
         assertTrue(lp.isLoginButton());

@@ -55,17 +55,7 @@ public class AdminPage extends BasePage{
         }
         return 0;
     }
-    private int findThByName(String name) {
-        List<WebElement> matrix = driver.findElements(By.xpath("//thead/tr/th"));
-        int result = 0;
-        for (WebElement e : matrix)
-        {
-            result++;
-            if (e.getText().contains(name))
-                return result;
-        }
-        return 0;
-    }
+
     public boolean validateField(String name, String header, String value) {
         int tr = findTrByName(name);
         int th = findThByName(header);

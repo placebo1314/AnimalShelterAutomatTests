@@ -1,5 +1,6 @@
 package testing.pages.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import testing.pages.utils.DriverSingleton;
 
 import java.time.Duration;
+import java.util.List;
 
 public abstract class BasePage {
 
@@ -16,12 +18,10 @@ public abstract class BasePage {
     @FindBy(id = "logout")
     protected WebElement logoutButton;
 
-    protected static String adminPassword = System.getenv("adminPassword");//"Admin";
-    private String userName = System.getenv("userName");//"aa";
-    private String userEmail = System.getenv("userEmail");// "aa@aa";
-    private String userPassword = System.getenv("userPassword");//"aa";
-    private String adminName = System.getenv("adminName");//"Admin";
-    private String adminEmail = System.getenv("adminEmail");//"Admin@Admin";
+    public String USERnAME = System.getenv("userName");//"aa";
+    public String USEReMAIL = System.getenv("userEmail");// "aa@aa";
+    public String ADMINnAME = System.getenv("adminName");//"Admin";
+    public String ADMINeMAIL = System.getenv("adminEmail");//"Admin@Admin";
 
     public BasePage(){
         this.driver = DriverSingleton.getDriver();
@@ -36,5 +36,16 @@ public abstract class BasePage {
     }
     public void logout(){
         logoutButton.click();
+    }
+    public int findThByName(String name) {
+        List<WebElement> matrix = driver.findElements(By.xpath("//thead/tr/th"));
+        int result = 0;
+        for (WebElement e : matrix)
+        {
+            result++;
+            if (e.getText().contains(name))
+                return result;
+        }
+        return 0;
     }
 }

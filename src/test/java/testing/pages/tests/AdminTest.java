@@ -11,12 +11,10 @@ import static testing.pages.utils.DriverSingleton.quit;
 public class AdminTest {
     LoginPage lp;
     AdminPage ap;
-    private String adminEmail = System.getenv("adminEmail");
-    private String adminPassword = System.getenv("adminPassword");
-    private String userName = System.getenv("userName");
-    private String userEmail = System.getenv("userEmail");
-    private String userPassword = System.getenv("userPassword");
-    private String baseUrl = "https://localhost:7241/Admin/Admin";
+
+    private final String ADMINpASSWORD = System.getenv("adminPassword");
+    private final String USERpASSWORD = System.getenv("userPassword");
+    private final String BASEURL = "https://localhost:7241/Admin/Admin";
 
     @BeforeAll
     public void setUp() {
@@ -24,7 +22,7 @@ public class AdminTest {
         ap = new AdminPage();
 
         lp.getUrl("https://localhost:7241/Account/Login");
-        lp.logIn(adminEmail, adminPassword);
+        lp.logIn(lp.ADMINeMAIL, ADMINpASSWORD);
     }
     @AfterAll
     public void tearDown(){
@@ -45,13 +43,13 @@ public class AdminTest {
         ap.addAnimalButton.click();
         ap.submitAnimalButton.click();
 
-        lp.getUrl(baseUrl);
+        lp.getUrl(BASEURL);
         assertFalse(ap.isTableContainsAnimal("TestName314"));
     }
     @Test
     public void addAnimalWithFutureDate(){
         ap.addAnimal("TestName314", "Macska", "2027-04-20");
-        lp.getUrl(baseUrl);
+        lp.getUrl(BASEURL);
         assertFalse(ap.isTableContainsAnimal("TestName314"));
 
     }
@@ -74,16 +72,16 @@ public class AdminTest {
     }
     @Test
     public void addAdmin(){
-        ap.changeAdminStatus(userName);
+        ap.changeAdminStatus(lp.USERnAME);
 
-        assertTrue(ap.checkAdminIcon(userName));
+        assertTrue(ap.checkAdminIcon(lp.USERnAME));
         lp.logout();
-        lp.logIn(userEmail, userPassword);
+        lp.logIn(lp.USEReMAIL, USERpASSWORD);
         assertTrue(lp.validateIsAdmin());
 
         lp.logout();
-        lp.logIn(adminEmail, adminPassword);
-        ap.changeAdminStatus(userName);
-        lp.getUrl(baseUrl);
+        lp.logIn(lp.ADMINeMAIL, ADMINpASSWORD);
+        ap.changeAdminStatus(lp.USERnAME);
+        lp.getUrl(BASEURL);
     }
 }

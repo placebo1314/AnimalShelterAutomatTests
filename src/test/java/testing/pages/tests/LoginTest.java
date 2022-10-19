@@ -15,12 +15,8 @@ public class LoginTest {
     //private CSVReader csvReader;
     //String[] csvCell;
 
-    private String adminPassword = System.getenv("adminPassword");
-    private String userName = System.getenv("userName");
-    private String userEmail = System.getenv("userEmail");
-    private String userPassword = System.getenv("userPassword");
-    private String adminName = System.getenv("adminName");
-    private String adminEmail = System.getenv("adminEmail");
+    private final String ADMINpASSWORD = System.getenv("adminPassword");
+    private final String USERpASSWORD = System.getenv("userPassword");
 
     @BeforeAll
     public void setUp() {
@@ -38,18 +34,18 @@ public class LoginTest {
 
     @Test
     public void loginUser(){
-        lp.logIn(userEmail, userPassword);
+        lp.logIn(lp.USEReMAIL, USERpASSWORD);
 
-        assertTrue(lp.validateLoginUserName(userName));
+        assertTrue(lp.validateLoginUserName(lp.USERnAME));
         assertFalse(lp.validateIsAdmin());
 
         lp.logout();
     }
     @Test
     public void loginAdminSuccessful(){
-        lp.logIn(adminEmail, adminPassword);
+        lp.logIn(lp.ADMINeMAIL, ADMINpASSWORD);
 
-        assertTrue(lp.validateLoginUserName(adminName));
+        assertTrue(lp.validateLoginUserName(lp.ADMINnAME));
         assertTrue(lp.validateIsAdmin());
 
         lp.logout();
@@ -68,7 +64,7 @@ public class LoginTest {
     }
     @Test
     public void loginWithWrongPassword(){
-        lp.logIn(adminEmail, "IdontCare");
+        lp.logIn(lp.ADMINeMAIL, "IdontCare");
 
         assertTrue(lp.validateErrorMessages("Invalid Information."));
         assertTrue(lp.isLoginButton());

@@ -7,19 +7,14 @@ import testing.pages.pages.RegisterPage;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static testing.pages.utils.DriverSingleton.quit;
-import static testing.pages.utils.Utility.getAlphaNumericString;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RegisterTest {
     LoginPage lp;
     RegisterPage rp;
 
-    private final String userName = "Test" + getAlphaNumericString(5);
-    private String userEmail = userName + "@" + userName;
-    private String userPassword = System.getenv("userPassword");//"aa";
-    private String adminName = System.getenv("adminName");//"Admin";
-    private String adminEmail = System.getenv("adminEmail");//"Admin@Admin";
-    private String adminPassword = System.getenv("adminPassword");//"Admin";
+    private final String USERpASSWORD = System.getenv("userPassword");//"aa";
+    private final String ADMINpASSWORD = System.getenv("adminPassword");//"Admin";
 
     @BeforeAll
     public void setUp() {
@@ -37,47 +32,47 @@ public class RegisterTest {
 
     @Test
     public void registerUser(){
-        rp.RegistNewAccount(userName, userEmail, userPassword);
-        lp.logIn(userEmail, userPassword);
+        rp.RegistNewAccount(lp.USERnAME, lp.USEReMAIL, USERpASSWORD);
+        lp.logIn(lp.USEReMAIL, USERpASSWORD);
 
-        assertTrue(lp.validateLoginUserName(userName));
+        assertTrue(lp.validateLoginUserName(lp.USERnAME));
         assertFalse(lp.validateIsAdmin());
 
         lp.logout();
     }
     @Test
     public void registerInvalidEmail(){
-        rp.RegistNewAccount("IdontCare", "IdontCare", userPassword);
+        rp.RegistNewAccount("IdontCare", "IdontCare", USERpASSWORD);
 
         assertTrue(lp.isLoginButton());
     }
     @Test
     public void registerWhenUserAlreadyExists(){
-        rp.RegistNewAccount(adminName, adminEmail, adminPassword);
+        rp.RegistNewAccount(lp.ADMINnAME, lp.ADMINeMAIL, ADMINpASSWORD);
 
         assertTrue(rp.validateErrorMessage("Already taken."));
         assertTrue(lp.isLoginButton());
     }
     @Test
     public void registerWithoutPassword(){
-        rp.fillUserNameField(userName+"2");
-        rp.fillEmailField(userEmail+"2");
+        rp.fillUserNameField(rp.USERnAME +"2");
+        rp.fillEmailField(rp.USEReMAIL +"2");
         rp.submitRegister.click();
 
         assertTrue(lp.isLoginButton());
     }
     @Test
     public void registerWithoutName(){
-        rp.fillPasswordField(userPassword);
-        rp.fillEmailField(userEmail+"2");
+        rp.fillPasswordField(USERpASSWORD);
+        rp.fillEmailField(rp.USEReMAIL +"2");
         rp.submitRegister.click();
 
         assertTrue(lp.isLoginButton());
     }
     @Test
     public void registerWithoutEmail(){
-        rp.fillUserNameField(userName+"2");
-        rp.fillPasswordField(userPassword);
+        rp.fillUserNameField(rp.USERnAME +"2");
+        rp.fillPasswordField(USERpASSWORD);
         rp.submitRegister.click();
 
         assertTrue(lp.isLoginButton());
