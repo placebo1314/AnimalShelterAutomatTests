@@ -13,6 +13,10 @@ public class AdminTest {
     AdminPage ap;
     private String adminEmail = System.getenv("adminEmail");
     private String adminPassword = System.getenv("adminPassword");
+    private String userName = System.getenv("userName");
+    private String userEmail = System.getenv("userEmail");
+    private String userPassword = System.getenv("userPassword");
+    private String baseUrl = "https://localhost:7241/Admin/Admin";
 
     @BeforeAll
     public void setUp() {
@@ -37,9 +41,17 @@ public class AdminTest {
         ap.deleteAnimal("TestName314");
     }
     @Test
+    public void addAnimalEmpty(){
+        ap.addAnimalButton.click();
+        ap.submitAnimalButton.click();
+
+        lp.getUrl(baseUrl);
+        assertFalse(ap.isTableContainsAnimal("TestName314"));
+    }
+    @Test
     public void addAnimalWithFutureDate(){
         ap.addAnimal("TestName314", "Macska", "2027-04-20");
-        lp.getUrl("https://localhost:7241/Admin/Admin");
+        lp.getUrl(baseUrl);
         assertFalse(ap.isTableContainsAnimal("TestName314"));
 
     }
@@ -59,5 +71,19 @@ public class AdminTest {
         assertFalse(ap.isTableContainsAnimal("TestAnimal123"));
 
         ap.deleteAnimal("EditedAnimal123");
+    }
+    @Test
+    public void addAdmin(){
+        ap.changeAdminStatus(userName);
+
+        assertTrue(ap.checkAdminIcon(userName));
+        lp.logout();
+        lp.logIn(userEmail, userPassword);
+        assertTrue(lp.validateIsAdmin());
+
+        lp.logout();
+        lp.logIn(adminEmail, adminPassword);
+        ap.changeAdminStatus(userName);
+        lp.getUrl(baseUrl);
     }
 }

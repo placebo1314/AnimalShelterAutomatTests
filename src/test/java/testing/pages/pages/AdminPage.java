@@ -11,6 +11,8 @@ import java.util.List;
 public class AdminPage extends BasePage{
     @FindBy(id = "addAnimal")
     public WebElement addAnimalButton;
+    @FindBy(id = "editUsers")
+    public WebElement editUsersButton;
     //AddAnimals:
     @FindBy(id = "Name")
     public WebElement nameField;
@@ -20,6 +22,7 @@ public class AdminPage extends BasePage{
     public WebElement InclusionField;
     @FindBy(id = "submit-animal")
     public WebElement submitAnimalButton;
+
 
     public void addAnimal(String name, String species, String date) {
         addAnimalButton.click();
@@ -85,5 +88,17 @@ public class AdminPage extends BasePage{
         target.clear();
         target.sendKeys(newValue);
         submitAnimalButton.click();
+    }
+    public void changeAdminStatus(String userName) {
+        editUsersButton.click();
+        String path =  "//tbody/tr[" + findTrByName(userName) + "]/td[" + findThByName("Edit") + "]/a";
+        driver.findElement(By.xpath(path)).click();
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+    }
+    public boolean checkAdminIcon(String userName) {
+        getUrl("https://localhost:7241/Admin/Administrators");
+        String path =  "//tbody/tr[" + findTrByName(userName) + "]/td[" + findThByName("Edit") + "]/a/i";
+        return driver.findElement(By.xpath(path)).getAttribute("class").contains("fa fa-trash");
     }
 }
