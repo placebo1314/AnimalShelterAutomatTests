@@ -1,5 +1,6 @@
 package testing.pages.pages;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -74,6 +75,8 @@ public class AdminPage extends BasePage{
     public void deleteAnimal(String name) {
         String path = "//tbody/tr[" + findTrByName(name) + "]/td/a/i[@class='fa fa-trash']";
         driver.findElement(By.xpath(path)).click();
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
     }
     public void editAnimal(String name, String editFieldId, String newValue) {
         String path = "//tbody/tr[" + findTrByName(name) + "]/td/a/i[@class='fi-page-edit']";
