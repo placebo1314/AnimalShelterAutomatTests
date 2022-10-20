@@ -42,6 +42,21 @@ public class LoginTest {
         lp.logout();
     }
     @Test
+    public void loginEmpty(){
+        lp.submitLogin.click();
+
+        assertTrue(lp.isLoginButton());
+        assertFalse(lp.validateIsAdmin());
+    }
+    @Test
+    public void loginWithoutPassword(){
+        lp.emailField.sendKeys(lp.USEReMAIL);
+        lp.submitLogin.click();
+
+        assertTrue(lp.isLoginButton());
+        assertFalse(lp.validateIsAdmin());
+    }
+    @Test
     public void loginAdminSuccessful(){
         lp.logIn(lp.ADMINeMAIL, ADMINpASSWORD);
 
