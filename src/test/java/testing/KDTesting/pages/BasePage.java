@@ -1,4 +1,4 @@
-package testing.pages.pages;
+package testing.KDTesting.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +28,7 @@ public abstract class BasePage {
         this.driver = DriverSingleton.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         PageFactory.initElements(driver, this);
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
     }
 
     public void getUrl(String url)
