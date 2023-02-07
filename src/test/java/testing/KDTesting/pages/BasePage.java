@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import testing.pages.utils.DriverSingleton;
+import testing.KDTesting.utils.DriverSingleton;
 
 import java.time.Duration;
 import java.util.List;
